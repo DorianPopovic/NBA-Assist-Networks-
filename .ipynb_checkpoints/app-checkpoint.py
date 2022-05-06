@@ -27,17 +27,17 @@ from dash.dependencies import Input, Output
 import pickle
 
 
-# Load saved daata scraped from the web
-data_file = open("data.pkl", "rb")
-taems_dict = pickle.load(data_file)
+# Load saved data scraped from the web
+link = 'https://raw.githubusercontent.com/DorianPopovic/NBA-Assist-Networks-/master/data.pkl'
+teams_dict = pd.read_pickle(link)
 
 # Initialize dash app
 external_stylesheets = [dbc.themes.BOOTSTRAP, "assets/nba-networks.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 app.title = "🏀 NBA Assist Networks"
 
-server = app.server
 
 # Function that outputs the interactive plot
 def plot_NBA_assist_network(team, layout):
