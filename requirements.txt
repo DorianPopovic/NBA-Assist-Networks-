@@ -7,3 +7,4 @@ whitenoise==5.2.0
 networkx==2.5.0
 IPython==5.5.0
 nbformat==4.2.0
+scipy==1.5.2
