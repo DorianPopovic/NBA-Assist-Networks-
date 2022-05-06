@@ -166,6 +166,7 @@ def plot_NBA_assist_network(team, layout):
 with open("explanations.md", "r") as f:
     howto_md = f.read()
 
+"""""
 modal_overlay = dbc.Modal(
     [
         dbc.ModalBody(html.Div([dcc.Markdown(howto_md)], id="howto-md")),
@@ -174,6 +175,7 @@ modal_overlay = dbc.Modal(
     id="modal",
     size="lg",
 )
+"""""
 
 button_github = dbc.Button(
     "View Code on github",
@@ -229,7 +231,7 @@ header = dbc.Navbar(
                                 id="navbar-collapse",
                                 navbar=True,
                             ),
-                            modal_overlay,
+                            #modal_overlay,
                         ],
                         md=2,
                     ),
