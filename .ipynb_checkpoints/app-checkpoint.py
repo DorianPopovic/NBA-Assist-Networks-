@@ -31,15 +31,13 @@ import pickle
 data_file = open("data.pkl", "rb")
 taems_dict = pickle.load(data_file)
 
-
-# Instantiate dash app
-app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
-
 # Initialize dash app
 external_stylesheets = [dbc.themes.BOOTSTRAP, "assets/nba-networks.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.title = "🏀 NBA Assist Networks"
+
+server = app.server
 
 # Function that outputs the interactive plot
 def plot_NBA_assist_network(team, layout):
