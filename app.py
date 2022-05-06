@@ -7,8 +7,8 @@ from whitenoise import WhiteNoise   #for serving static files on Heroku
 
 import matplotlib.pyplot as plt
 import networkx as nx
-import requests
-import json
+#import requests
+#import json
 
 import plotly.offline as py
 py.init_notebook_mode(connected=True)
