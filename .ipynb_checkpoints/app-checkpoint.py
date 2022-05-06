@@ -11,7 +11,7 @@ import networkx as nx
 #import json
 
 import plotly.offline as py
-py.init_notebook_mode(connected=True)
+#py.init_notebook_mode(connected=True)
 import plotly.graph_objs as go
 import plotly.io as pio
 pio.renderers.default = 'colab'
