@@ -4,3 +4,4 @@ matplotlib==3.5.1
 gunicorn==20.0.4
 dash-bootstrap-components==1.1.0 
 whitenoise==5.2.0
+networkx==2.5.0
