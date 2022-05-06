@@ -175,19 +175,6 @@ modal_overlay = dbc.Modal(
     size="lg",
 )
 
-# Buttons
-""""
-button_howto = dbc.Button(
-    "Learn more",
-    id="howto-open",
-    outline=True,
-    color="info",
-    href="https://dorianpopovic.github.io/project/2022/05/01/NBAAssistsNetwork.html",
-    # Turn off lowercase transformation for class .button in stylesheet
-    style={"textTransform": "none"},
-)
-"""""
-
 button_github = dbc.Button(
     "View Code on github",
     outline=True,
