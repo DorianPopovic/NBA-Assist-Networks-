@@ -235,7 +235,6 @@ header = dbc.Navbar(
                             dbc.Collapse(
                                 dbc.Nav(
                                     [
-                                        #dbc.NavItem(button_howto),
                                         dbc.NavItem(button_github),
                                     ],
                                     navbar=True,
