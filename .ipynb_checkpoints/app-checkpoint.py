@@ -176,6 +176,7 @@ modal_overlay = dbc.Modal(
 )
 
 # Buttons
+""""
 button_howto = dbc.Button(
     "Learn more",
     id="howto-open",
@@ -185,6 +186,7 @@ button_howto = dbc.Button(
     # Turn off lowercase transformation for class .button in stylesheet
     style={"textTransform": "none"},
 )
+"""""
 
 button_github = dbc.Button(
     "View Code on github",
@@ -234,7 +236,7 @@ header = dbc.Navbar(
                                 dbc.Nav(
                                     [
                                         dbc.NavItem(button_howto),
-                                        dbc.NavItem(button_github),
+                                        #dbc.NavItem(button_github),
                                     ],
                                     navbar=True,
                                 ),
