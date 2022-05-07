@@ -36,7 +36,7 @@ external_stylesheets = [dbc.themes.BOOTSTRAP, "assets/nba-networks.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
-app.title = "🏀 NBA Assist Networks"
+app.title = "NBA Assist Networks"
 
 
 # Function that outputs the interactive plot
