@@ -158,6 +158,68 @@ def plot_NBA_assist_network(team, layout):
         
         fig.show()
         return fig
+    
+    
+# Helper function for plotting the degree distribution of a Graph
+def plot_degree_distribution(team):
+    
+    data = teams_dict[team][0]
+    G = nx.from_numpy_matrix(np.array(data.values, dtype=int), parallel_edges=True)
+    degrees = {}
+    for node in G.nodes():
+        degree = G.degree(node)
+        if degree not in degrees:
+            degrees[degree] = 0
+        degrees[degree] += 1
+    sorted_degree = sorted(degrees.items())
+    deg = [k for (k,v) in sorted_degree]
+    cnt = [v for (k,v) in sorted_degree]
+    fig, ax = plt.subplots()
+    plt.bar(deg, cnt, color='b', alpha=0.75)
+    plt.title("Assist Network Degree Distribution")
+    plt.ylabel("Count")
+    plt.xlabel("Degree")
+    ax.set_xticks([d for d in deg])
+    ax.set_xticklabels(deg)
+    
+    return ax
+    
+# Render matplotlib barplot to plotly one
+def bar_to_plotly(ax: mpl.axes.Axes) -> go.Figure:
+    x, w, h, c = [], [], [], []
+    rects = [rect for rect in ax.get_children()
+             if isinstance(rect, mpl.patches.Rectangle)][:-1]
+    for rect in rects:
+        x.append(rect.get_x())
+        w.append(rect.get_width())
+        h.append(rect.get_height())
+        c.append(f"rgb({','.join(map(str, np.array(rect.get_facecolor()) * 255))})")
+    offset = w[0] / 2.
+    ticks = {"vals": [], "text": []}
+    for rect in ax.get_xticklabels():
+        ticks["vals"].append(rect.get_position()[0] - offset)
+        ticks["text"].append(rect.get_text())
+    f = go.Figure([go.Bar(x=x, y=h, width=w, marker_color=c, opacity=0.5)],
+                  layout=go.Layout(barmode="group"))
+    f.update_layout(
+        height=333,
+        template='plotly_white',
+        title=ax.get_title(),
+        xaxis={
+            "title_text": ax.get_xlabel(),
+            "tickmode": "array",
+            "range": [ax.get_xlim()[0], ax.get_xlim()[1]-w[0]],
+            "tickvals": ticks["vals"],
+            "ticktext": ticks["text"]
+        },
+        yaxis={
+            "title_text": ax.get_ylabel(),
+            "range": ax.get_ylim()
+        }
+    )
+    
+    return f
+
 
 # Modal
 # Modal
@@ -305,6 +367,21 @@ network = [
     )
 ]
 
+# Degree distribution plot
+degree = [
+    dbc.Card(
+        id="degree-card",
+        children=[
+            dbc.CardHeader("Graph Degree Distribution"),
+            dbc.CardBody(
+                [
+                    dcc.Graph(id = 'Degree_plot')
+                ],
+                style={"width": "100%", "height": "100%"}
+            )
+        ]
+    )
+]
 
 # sidebar
 sidebar = [
@@ -373,7 +450,8 @@ app.layout =html.Div([
                 dbc.Row(description),
                 dbc.Row(
                     id="app-content",
-                    children=[dbc.Col(network, md=8), dbc.Col(sidebar, md=4)],
+                    children=[dbc.Col(network, md=7),
+                              dbc.Col([dbc.Row(sidebar), dbc.Row(degree)], md=5)],
                 )
             ],
             fluid=True,
@@ -386,7 +464,7 @@ app.layout =html.Div([
               [Input(component_id='teams_dropdown', component_property= 'value'),
                Input(component_id='layout_dropdown', component_property= 'value')])
 def graph_update(teams_dropdown_value, layouts_dropdown_value):
-    return plot_NBA_assist_network(teams_dropdown_value, layouts_dropdown_value)
+    return plot_NBA_assist_network(teams_dropdown_value, layouts_dropdown_value), bar_to_plotly(plot_degree_distribution(teams_dropdown_value))
 
 
 
