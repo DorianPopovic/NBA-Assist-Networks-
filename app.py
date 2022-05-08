@@ -26,6 +26,8 @@ from dash.dependencies import Input, Output
 
 import pickle
 
+import matplotlib as mpl
+
 
 # Load saved data scraped from the web
 link = 'https://raw.githubusercontent.com/DorianPopovic/NBA-Assist-Networks-/master/data.pkl'
