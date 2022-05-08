@@ -463,6 +463,7 @@ app.layout =html.Div([
 
 
 @app.callback(Output(component_id='NBA_plot', component_property= 'figure'),
+              Output(component_id='Degree_plot', component_property= 'figure'),
               [Input(component_id='teams_dropdown', component_property= 'value'),
                Input(component_id='layout_dropdown', component_property= 'value')])
 def graph_update(teams_dropdown_value, layouts_dropdown_value):
